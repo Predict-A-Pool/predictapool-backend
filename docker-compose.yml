@@ -26,5 +26,18 @@ services:
       --host 0.0.0.0
       --port 8000
 
+  frontend:
+    build: ../predictapool-frontend
+    container_name: predictapool-frontend
+    depends_on:
+      - backend
+    ports:
+      - "3010:3000"
+    env_file:
+      - ../predictapool-frontend/.env
+    volumes:
+      - ../predictapool-frontend:/app
+      - /app/node_modules
+
 volumes:
   pgdata:
