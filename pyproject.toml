@@ -1,0 +1,20 @@
+[build-system]
+requires = [
+    "setuptools>=68",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "predictapool-backend"
+version = "0.1.0"
+description = "Predict-A-Pool backend service"
+requires-python = ">=3.12"
+
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29"
+]
+
+[tool.uvicorn]
+factory=false
