@@ -1,11 +1,13 @@
+# Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-
+*.py[cod]
+*.egg-info/
 build/
 dist/
-*.egg-info/
 
+# Virtual environments
 .venv/
 .env
+
+# OS
+.DS_Store
