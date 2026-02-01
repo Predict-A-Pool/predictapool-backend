@@ -1,17 +1,12 @@
 from fastapi import FastAPI
-from sqlalchemy import text
-from contextlib import asynccontextmanager
-from app.db import engine
+from strawberry.fastapi import GraphQLRouter
+from app.graphql.schema import schema
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # Startup code
-    with engine.connect() as conn:
-        conn.execute(text("SELECT 1"))
-    yield
-    # Shutdown code
+app = FastAPI()
 
-app = FastAPI(lifespan=lifespan)
+graphql_app = GraphQLRouter(schema)
+
+app.include_router(graphql_app, prefix="/graphql")
 
 @app.get("/health")
 def health():

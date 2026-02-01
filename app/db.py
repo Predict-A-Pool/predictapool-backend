@@ -1,19 +1,15 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
-from typing import Generator
+from sqlalchemy import Engine, create_engine
+from typing import Optional
 import os
 
-DATABASE_URL = os.getenv("DATABASE_URL")
-if DATABASE_URL is None:
-    raise ValueError("DATABASE_URL environment variable is not set")
+_engine: Optional[Engine] = None
 
-engine = create_engine(DATABASE_URL)
-
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine, Future=True)
-
-def get_db() -> Generator[Session, None, None]:
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+def get_engine() -> Engine:
+    global _engine
+    
+    if _engine is None:
+        DATABASE_URL = os.getenv("DATABASE_URL")
+        if DATABASE_URL is None:
+            raise ValueError("DATABASE_URL environment variable is not set")
+        _engine = create_engine(DATABASE_URL)
+    return _engine
