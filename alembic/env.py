@@ -5,6 +5,11 @@ from sqlalchemy import pool
 
 from alembic import context
 
+from app.db.base import Base
+from app.db import models # noqa: F401
+
+assert models # to avoid "imported but unused" warning
+
 import os
 
 from dotenv import load_dotenv
@@ -26,7 +31,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
