@@ -14,6 +14,7 @@ services:
 
   backend:
     build: .
+    platform: linux/amd64
     container_name: predictapool-backend
     env_file:
       - .env
