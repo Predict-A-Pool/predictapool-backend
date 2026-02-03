@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv(".env.local")
+
 from fastapi import FastAPI
 from strawberry.fastapi import GraphQLRouter
 from app.graphql.schema import schema
