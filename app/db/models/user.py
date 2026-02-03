@@ -10,8 +10,8 @@ class User(Base):
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(
+        String(36),
         primary_key=True, 
-        autoincrement=True,
         default=uuid.uuid4
     )
 
