@@ -40,5 +40,11 @@ services:
       - ../predictapool-frontend:/app
       - /app/node_modules
 
+  landing:
+    build: ../predictapool-landing
+    container_name: predictapool-landing
+    ports:
+      - "4321:4321"
+
 volumes:
   pgdata:
