@@ -1,11 +1,10 @@
 from sqlalchemy import select
-from sqlalchemy.orm import Session
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.models.user import User
 from app.security.passwords import hash_password
 
-def create_user(db: Session, email: str, password: str) -> User:
+async def create_user(db: AsyncSession, email: str, password: str) -> User:
     user = User(
         email=email,
         password_hash=hash_password(password)
@@ -13,16 +12,12 @@ def create_user(db: Session, email: str, password: str) -> User:
 
     db.add(user)
 
-    try:
-        db.commit()
-    except IntegrityError:
-        db.rollback()
-        raise ValueError("User with this email already exists")
+    await db.commit()
+    await db.refresh(user)
     
-    db.refresh(user)
     return user
 
-def get_user_by_email(db: Session, email: str) -> User | None:
+async def get_user_by_email(db: AsyncSession, email: str) -> User | None:
     stmt = select(User).where(User.email == email)
-    result = db.execute(stmt)
+    result = await db.execute(stmt)
     return result.scalar_one_or_none()

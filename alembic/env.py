@@ -18,7 +18,7 @@ load_dotenv(".env.local", override=False)
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-database_url = os.getenv("DATABASE_URL")
+database_url = os.getenv("ALEMBIC_DATABASE_URL")
 if database_url:
     config.set_main_option("sqlalchemy.url", database_url)
 
