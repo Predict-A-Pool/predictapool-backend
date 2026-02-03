@@ -1,3 +1,4 @@
+import uuid
 from pydantic import BaseModel, EmailStr, Field, field_validator
 
 class UserCreate(BaseModel):
@@ -22,7 +23,7 @@ class LoginRequest(BaseModel):
     password: str = Field(min_length=8, max_length=72)
 
 class UserPublic(BaseModel):
-    id: str
+    id: uuid.UUID
     email: EmailStr
     full_name: str | None = None
     is_active: bool
