@@ -8,8 +8,8 @@ dist/
 # Virtual environments
 .venv/
 .env
+.env.*
 
 # OS
 .DS_Store
-.env.local
 .vscode
