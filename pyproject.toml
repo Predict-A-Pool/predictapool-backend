@@ -27,6 +27,13 @@ dependencies = [
     "python-jose[cryptography]"
 ]
 
+[project.optional-dependencies]
+test = [
+  "pytest",
+  "pytest-asyncio",
+  "httpx",
+]
+
 [tool.uvicorn]
 factory=false
 
