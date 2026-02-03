@@ -2,7 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.models.user import User
-from app.security.passwords import hash_password
+from app.core.passwords import hash_password
 
 async def create_user(db: AsyncSession, email: str, password: str) -> User:
     user = User(

@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.session import get_db
 from app.db.crud.users import create_user, get_user_by_email
 from app.schemas.user import UserCreate, LoginRequest, UserPublic
-from app.security.passwords import verify_password
+from app.core.passwords import verify_password
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
