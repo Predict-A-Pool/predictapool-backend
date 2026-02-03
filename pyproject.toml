@@ -18,7 +18,10 @@ dependencies = [
     "alembic>=1.13",
     "psycopg[binary]>=3.1",
     "python-dotenv>=1.0",
-    "strawberry-graphql>=0.224"
+    "strawberry-graphql>=0.224",
+    "passlib>=1.7.4",
+    "bcrypt<4.0.1",
+    "pydantic[email]"
 ]
 
 [tool.uvicorn]

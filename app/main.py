@@ -4,12 +4,14 @@ load_dotenv(".env.local")
 from fastapi import FastAPI
 from strawberry.fastapi import GraphQLRouter
 from app.graphql.schema import schema
+from app.routes.auth import router as auth_router
 
 app = FastAPI()
 
 graphql_app = GraphQLRouter(schema)
 
 app.include_router(graphql_app, prefix="/graphql")
+app.include_router(auth_router)
 
 @app.get("/health")
 def health():
